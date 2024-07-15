@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.24)
 project(LandlordGame)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -8,7 +8,7 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_PREFIX_PATH "C:/Qt/6.7.2/mingw_64")
 
-include_directories(${PROJECT_BINARY_DIR} ${PROJECT_BINARY_DIR}/sources)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 find_package(Qt6 COMPONENTS
         Core
@@ -16,7 +16,9 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(LandlordGame main.cpp gamepanel.cpp)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/ SRC_LIST)
+
+add_executable(LandlordGame main.cpp gamepanel.cpp ${SRC_LIST})
 target_link_libraries(LandlordGame
         Qt::Core
         Qt::Gui
