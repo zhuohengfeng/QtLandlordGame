@@ -25,7 +25,7 @@ qt_add_resources(${QRC_SOURCE_FILE})
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/ SRC_LIST)
 
-add_executable(LandlordGame main.cpp gamepanel.cpp ${SRC_LIST} ${QRC_SOURCE_FILE} ${LOGO_FILE})
+add_executable(LandlordGame WIN32 main.cpp gamepanel.cpp ${SRC_LIST} ${QRC_SOURCE_FILE} ${LOGO_FILE})
 target_link_libraries(LandlordGame
         Qt::Core
         Qt::Gui
