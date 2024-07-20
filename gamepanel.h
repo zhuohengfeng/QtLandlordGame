@@ -20,8 +20,13 @@ public:
 
     ~GamePanel() override;
 
+protected:
+    void paintEvent(QPaintEvent* ev);
+    void mouseMoveEvent(QMouseEvent* ev);
+
 private:
     Ui::GamePanel *ui;
+    QPixmap m_bkImage;
 };
 
 

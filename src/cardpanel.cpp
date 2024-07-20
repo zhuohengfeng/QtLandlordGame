@@ -3,6 +3,8 @@
 //
 
 #include "cardpanel.h"
+
+#include <QMouseEvent>
 #include <QPainter>
 
 CardPanel::CardPanel(QWidget *parent) : QWidget(parent) {
@@ -13,14 +15,13 @@ CardPanel::CardPanel(QWidget *parent) : QWidget(parent) {
 void CardPanel::setImage(const QPixmap &front, const QPixmap &back) {
     m_frontImage = front;
     m_backImage = back;
-    setFixedSize(m_frontImage.size());
+    setFixedSize(m_frontImage.size()); // 设置窗口尺寸
     update(); // call paintEvent
 }
 
 QPixmap CardPanel::getImage() const {
     return m_frontImage;
 }
-
 
 void CardPanel::setFrontSide(bool flag) {
     m_isFront = flag;
@@ -54,12 +55,16 @@ const Player* CardPanel::getOwner() const {
     return m_owner;
 }
 
+void CardPanel::clicked() {
+    emit cardSelected(Qt::LeftButton);
+}
+
 void CardPanel::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event)
     QPainter p(this);
     p.drawPixmap(rect(), m_isFront ? m_frontImage : m_backImage);
 }
 
 void CardPanel::mousePressEvent(QMouseEvent *event) {
-    QWidget::mousePressEvent(event);
+    emit cardSelected(event->button());
 }
-
