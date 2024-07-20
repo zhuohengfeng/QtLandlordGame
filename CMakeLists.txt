@@ -16,12 +16,16 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
+# 设置icon
+set(LOGO_FILE app_win32.rc)
+
+# 设置资源
 set(QRC_SOURCE_FILE res.qrc)
 qt_add_resources(${QRC_SOURCE_FILE})
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/ SRC_LIST)
 
-add_executable(LandlordGame main.cpp gamepanel.cpp ${SRC_LIST} ${QRC_SOURCE_FILE})
+add_executable(LandlordGame main.cpp gamepanel.cpp ${SRC_LIST} ${QRC_SOURCE_FILE} ${LOGO_FILE})
 target_link_libraries(LandlordGame
         Qt::Core
         Qt::Gui
